@@ -1,0 +1,15 @@
+{
+  "name": "mock-shop-checkout",
+  "steps": [
+    {"name": "home", "action": "goto", "target": "/index.html", "capture": true},
+    {"name": "add to cart", "action": "click", "target": "[data-testid=add-to-cart] >> nth=0"},
+    {"name": "cart", "action": "goto", "target": "/cart.html", "capture": true},
+    {"name": "go to checkout", "action": "click", "target": "role=link[name=\"Checkout\"]"},
+    {"name": "fill name", "action": "fill", "target": "#name", "value": "Ada Lovelace"},
+    {"name": "fill email", "action": "fill", "target": "#email", "value": "ada@example.com"},
+    {"name": "fill address", "action": "fill", "target": "#address", "value": "12 Analytical Way"},
+    {"name": "checkout form", "action": "wait", "target": "form", "capture": true},
+    {"name": "place order", "action": "click", "target": "role=button[name=\"Place order\"]"},
+    {"name": "confirmation", "action": "wait", "target": "#done", "capture": true}
+  ]
+}

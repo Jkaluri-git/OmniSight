@@ -1,0 +1,16 @@
+# Drop into the *frontend* repo as .github/workflows/omnisight.yml
+name: OmniSight visual QA
+on:
+  deployment_status:            # fires when your staging deploy succeeds
+jobs:
+  visual-qa:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'staging'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask OmniSight to review staging
+        run: |
+          curl -fsS -X POST "${{ secrets.OMNISIGHT_URL }}/webhook/ci" \
+            -H "X-API-Key: ${{ secrets.OMNISIGHT_API_KEY }}" -H "Content-Type: application/json" \
+            -d '{"repo":"${{ github.repository }}","sha":"${{ github.event.deployment.sha }}","branch":"${{ github.event.deployment.ref }}","staging_url":"${{ github.event.deployment_status.environment_url }}"}'
+# Alternative: add a repo webhook (event: "Deployments") pointing at  <OMNISIGHT_URL>/webhook/github
+# with GITHUB_WEBHOOK_SECRET set on both sides; no workflow file needed.

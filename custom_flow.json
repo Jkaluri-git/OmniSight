@@ -1,0 +1,9 @@
+{
+  "name": "my-app",
+  "steps": [
+    {"name": "home", "action": "goto", "target": "/", "capture": true},
+    {"name": "open product", "action": "click", "target": "text=Add to bag"},
+    {"name": "bag", "action": "goto", "target": "/bag", "capture": true},
+    {"name": "checkout", "action": "click", "target": "role=button[name=\"Checkout\"]", "capture": true}
+  ]
+}
