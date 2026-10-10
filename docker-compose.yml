@@ -1,0 +1,9 @@
+services:
+  omnisight:
+    build: .
+    ports: ["8000:8000"]
+    env_file: .env
+    volumes: ["omnisight-data:/data"]
+    # optional local VLM:  docker run -d -p 11434:11434 ollama/ollama && ollama pull llava
+volumes:
+  omnisight-data:
